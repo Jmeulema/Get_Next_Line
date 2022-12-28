@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmeulema <jmeulema@student.s19.be>         +#+  +:+       +#+        */
+/*   By: lolemmen <lolemmen@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:48:50 by jmeulema          #+#    #+#             */
-/*   Updated: 2022/08/02 14:50:34 by jmeulema         ###   ########.fr       */
+/*   Updated: 2022/12/28 22:34:50 by lolemmen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(void)
 	int		fd;
 
 	i = 1;
-	fd = open("file.txt", O_RDONLY);
+	fd = open("main.c", O_RDONLY);
 	while (i != 0)
 	{
 		str = get_next_line(fd);

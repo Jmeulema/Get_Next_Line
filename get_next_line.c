@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmeulema <jmeulema@student.s19.be>         +#+  +:+       +#+        */
+/*   By: lolemmen <lolemmen@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:19:31 by jmeulema          #+#    #+#             */
-/*   Updated: 2022/08/02 14:50:25 by jmeulema         ###   ########.fr       */
+/*   Updated: 2022/12/28 22:28:44 by lolemmen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static char	*ft_free(char *stash, char *str)
 {
 	char	*mem;
 
+	if (!stash)
+		stash = ft_calloc(1,1);
 	mem = ft_strjoin(stash, str);
 	free(stash);
 	return (mem);
@@ -55,7 +57,7 @@ static char	*ft_next(char *stash)
 	i = 0;
 	while (stash[i] && stash[i] != '\n')
 		i++;
-	if (!stash[i])
+	if (!stash[i] || (stash[i] || !stash[i + 1]))
 	{
 		free(stash);
 		return (NULL);
@@ -68,7 +70,8 @@ static char	*ft_next(char *stash)
 		line[j] = stash[i];
 		i++;
 		j++;
-	}	
+	}
+	line[j] = '\0';
 	free(stash);
 	return (line);
 }
@@ -78,8 +81,6 @@ char	*ft_read_file(int fd, char *res)
 	char	*buffer;
 	int		nbyte;
 
-	if (!res)
-		res = calloc(1, 1);
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	nbyte = 1;
 	while (!ft_strchr(buffer, '\n') && nbyte > 0)
