@@ -32,3 +32,13 @@ int	main(void)
 	}
 	printf("\n");
 }
+
+// int	main(void)
+// {
+// 	char	*str;
+// 	int	fd;
+
+// 	fd = open("file.txt", O_RDONLY);
+// 	str = get_next_line(fd);
+// 	printf("%s\n", str);	
+// }
