@@ -6,7 +6,7 @@
 /*   By: jmeulema <jmeulema@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:48:50 by jmeulema          #+#    #+#             */
-/*   Updated: 2022/08/02 14:50:34 by jmeulema         ###   ########.fr       */
+/*   Updated: 2022/12/20 13:48:37 by jmeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,16 @@ int	main(void)
 		if (!str)
 			i = 0;
 		else
-			printf("%s", str);
+			printf("%s\n", str);
 	}
-	printf("\n");
 }
+
+// int	main(void)
+// {
+// 	char	*str;
+// 	int	fd;
+
+// 	fd = open("file.txt", O_RDONLY);
+// 	str = get_next_line(fd);
+// 	printf("%s\n", str);	
+// }

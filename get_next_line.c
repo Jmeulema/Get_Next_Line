@@ -6,19 +6,19 @@
 /*   By: jmeulema <jmeulema@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:19:31 by jmeulema          #+#    #+#             */
-/*   Updated: 2022/08/02 14:50:25 by jmeulema         ###   ########.fr       */
+/*   Updated: 2022/12/20 13:54:48 by jmeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*ft_free(char *stash, char *str)
+static char	*ft_free(char *stash, char *buffer)
 {
-	char	*mem;
+	char	*new_stash;
 
-	mem = ft_strjoin(stash, str);
+	new_stash = ft_strjoin(stash, buffer);
 	free(stash);
-	return (mem);
+	return (new_stash);
 }
 
 static char	*ft_line(char *stash)
@@ -50,7 +50,7 @@ static char	*ft_next(char *stash)
 {
 	int		i;
 	int		j;
-	char	*line;
+	char	*newline;
 
 	i = 0;
 	while (stash[i] && stash[i] != '\n')
@@ -60,26 +60,26 @@ static char	*ft_next(char *stash)
 		free(stash);
 		return (NULL);
 	}
-	line = ft_calloc(ft_strlen(stash) - i + 1, sizeof(char));
+	newline = ft_calloc(ft_strlen(stash) - i + 1, sizeof(char));
 	i++;
 	j = 0;
 	while (stash[i])
 	{
-		line[j] = stash[i];
+		newline[j] = stash[i];
 		i++;
 		j++;
 	}	
 	free(stash);
-	return (line);
+	return (newline);
 }
 
-char	*ft_read_file(int fd, char *res)
+char	*ft_read_file(int fd, char *stash)
 {
 	char	*buffer;
 	int		nbyte;
 
-	if (!res)
-		res = calloc(1, 1);
+	if (!stash)
+		stash = ft_calloc(1, 1);
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	nbyte = 1;
 	while (!ft_strchr(buffer, '\n') && nbyte > 0)
@@ -91,10 +91,10 @@ char	*ft_read_file(int fd, char *res)
 			return (NULL);
 		}
 		buffer[nbyte] = '\0';
-		res = ft_free(res, buffer);
+		stash = ft_free(stash, buffer);
 	}
 	free(buffer);
-	return (res);
+	return (stash);
 }
 
 char	*get_next_line(int fd)
